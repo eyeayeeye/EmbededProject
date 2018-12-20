@@ -6,6 +6,11 @@ body {
 h1 {
   text-align: center;
   margin : 5px;
+  font-size: 64px;
+}
+
+h2{
+  font-size: 30px;
 }
 
 .redBlackground{
@@ -14,4 +19,7 @@ h1 {
 
 .greenBlackground{
   background-color: rgb(88, 218, 88);
+}
+button {
+  border-radius: 4px;
 }

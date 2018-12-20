@@ -33,7 +33,7 @@ const Header = styled.div`
 
   margin-top:60px;
   margin-bottom : 40px;
-  font-size : 64px;
+  font-size : 72px;
   grid-column :2;
   grid-row : 1;
   // text-align : center;
@@ -58,7 +58,7 @@ const Panel = styled.div`
   grid-row : 3;
   background : rgba(166,166,83,0.5);
   overflow: hidden;
-  height : 150px;
+  height : 175px;
   padding :15px;
   text-align: center;
   div{
@@ -67,7 +67,6 @@ const Panel = styled.div`
   }
   button{
     display:inline-block;
-    margin-left : 20px;
   }
   `
 const Panel2 = styled.div`
@@ -75,7 +74,7 @@ const Panel2 = styled.div`
   grid-row : 3;
   background : rgba(166,166,83,0.5);
   overflow: hidden;
-  height : 150px;
+  height : 175px;
   padding :15px;
   text-align: center;
   div{
@@ -84,7 +83,6 @@ const Panel2 = styled.div`
   }
   button{
     display:inline-block;
-    margin-left : 20px;
   }
 `
 
@@ -98,11 +96,12 @@ const Selector = styled.select`
 `;
 
 const Button = styled.button`
+    border-radius: 7px !important;
+    text-align: center;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    border-radius: 2px;
     color: #757575;
-    font-size: 14px;
+    font-size: 30px;
     background: #ffffff;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
@@ -152,7 +151,7 @@ class App extends Component {
           <h1> Status </h1>
           {this.state.state == 1 && (<Image src="img/secure.png" align="middle" />)}
           {this.state.state == 2 && (<Image src="img/warning.gif" align="middle" />)}
-          {this.state.state == 3 && (<Image src="img/deactivate.jpg" align="middle" />)}
+          {this.state.state == 3 && (<Image src="img/deactivate.png" align="middle" />)}
         </BoxPanel>
         <Panel>
           <h2>I'm leaving home</h2>
