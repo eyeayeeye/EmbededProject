@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const Image = styled.img`
-  width : 500px;
+  height: 350px;
   min-width : 0;
   min-height : 0;
 `
@@ -46,6 +46,7 @@ const BoxPanel = styled.div`
   overflow: hidden;
   height : 450px;
   padding :15px;
+  text-align: center;
   img{
     display:inline-block;
     margin : 10px;
@@ -59,6 +60,7 @@ const Panel = styled.div`
   overflow: hidden;
   height : 150px;
   padding :15px;
+  text-align: center;
   div{
     display:inline-block;
     margin : 10px;
@@ -75,6 +77,7 @@ const Panel2 = styled.div`
   overflow: hidden;
   height : 150px;
   padding :15px;
+  text-align: center;
   div{
     display:inline-block;
     margin : 10px;
@@ -115,102 +118,28 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      Xinput: "",
-      Yinput: "",
-      firstData: "",
-      secondData: "",
-      img: "",
-      selected_Xinput: "Overall",
-      selected_Yinput: "StudentStaff",
-      selected_firstData: "Top 500",
-      selected_secondData: "None",
-      createdGraph: false,
       isOpen: true,
+      state: 2,
+      //1 == safe
+      //2 == thief cao barn
+      //3 == deactivate
     }
-    this.handleXinput = this.handleXinput.bind(this)
-    this.handleYinput = this.handleYinput.bind(this)
-    this.handleFirstData = this.handleFirstData.bind(this)
-    this.handleSecondData = this.handleSecondData.bind(this)
+    this.setActivate = this.setActivate.bind(this)
   }
 
-  async createGraph(Xinput, Yinput, firstData, secondData) {
-    let formData = new FormData();
-    formData.append('Xinput', Xinput);
-    formData.append('Yinput', Yinput);
-    formData.append('firstData', firstData);
-    formData.append('secondData', secondData);
-    var response = await fetch(`${config.apiPath}/5931022121/createGraph`,
-      {
-        method: 'post',
-        body: formData
+  setActivate(stage) {
+    if (stage == false) {
+      this.setState({
+        isOpen: stage,
+        state: 3
       })
-    var data = await response.json()
-    this.setState({
-      img: data.path,
-      createdGraph: true,
-      Xinput: Xinput,
-      Yinput: Yinput,
-      firstData: firstData,
-      secondData: secondData,
-    })
-    console.log(data)
-  }
-
-  XinputList() {
-    var returnVal = [];
-    var gList = ['Overall', 'Teaching', 'Research', 'Citations', 'IndustryIncome', 'InterOutlook', 'StudentStaff', 'InterStudent', 'Female'];
-    for (var i = 0; i < gList.length; i++) {
-      returnVal.push(<option value={gList[i]}>{gList[i]}</option>)
     }
-    return returnVal
-  }
-
-  YinputList() {
-    var returnVal = [];
-    var gList = ['Overall', 'Teaching', 'Research', 'Citations', 'IndustryIncome', 'InterOutlook', 'StudentStaff', 'InterStudent', 'Female'];
-    for (var i = 0; i < gList.length; i++) {
-      returnVal.push(<option value={gList[i]}>{gList[i]}</option>)
+    else {
+      this.setState({
+        isOpen: stage,
+        state: 1
+      })
     }
-    return returnVal
-  }
-
-  firstDataList() {
-    var returnVal = [];
-    var gList = ['Top 500', 'Top 200', 'USA', 'China'];
-    for (var i = 0; i < gList.length; i++) {
-      returnVal.push(<option value={gList[i]}>{gList[i]}</option>)
-    }
-    return returnVal
-  }
-
-  secondDataList() {
-    var returnVal = [];
-    var gList = ['None', 'Top 200', 'USA', 'China'];
-    for (var i = 0; i < gList.length; i++) {
-      returnVal.push(<option value={gList[i]}>{gList[i]}</option>)
-    }
-    return returnVal
-  }
-
-  handleXinput(e) {
-    this.setState({
-      selected_Xinput: e.target.value
-    })
-  }
-  handleYinput(e) {
-    this.setState({
-      selected_Yinput: e.target.value
-    })
-  }
-  handleFirstData(e) {
-    this.setState({
-      selected_firstData: e.target.value
-    })
-  }
-  handleSecondData(e) {
-    this.setState({
-      selected_secondData: e.target.value
-    })
   }
   render() {
     console.log(this.state)
@@ -220,27 +149,18 @@ class App extends Component {
         <Image2 src="img/logo.png" align="middle" />
         <Header>Anti Thief</Header>
         <BoxPanel >
-          <h1> Score Box Plot </h1>
+          <h1> Status </h1>
+          {this.state.state == 1 && (<Image src="img/secure.png" align="middle" />)}
+          {this.state.state == 2 && (<Image src="img/warning.gif" align="middle" />)}
+          {this.state.state == 3 && (<Image src="img/deactivate.jpg" align="middle" />)}
         </BoxPanel>
         <Panel>
-          <h2>Thief is coming</h2>
-          <div class="input4">
-            Second Data : &nbsp;
-          <Selector value={this.state.selected_secondData} onChange={this.handleSecondData}>
-              {this.secondDataList()}
-            </Selector>
-          </div>
-          <Button onClick={() => this.createGraph(this.state.selected_Xinput, this.state.selected_Yinput, this.state.selected_firstData, this.state.selected_secondData)} > Show Pls</Button>
+          <h2>I'm leaving home</h2>
+          <Button onClick={() => this.setActivate(true)} > Set State</Button>
         </Panel>
         <Panel2>
-          <h2>Thief is coming</h2>
-          <div class="input4">
-            Second Data : &nbsp;
-          <Selector value={this.state.selected_secondData} onChange={this.handleSecondData}>
-              {this.secondDataList()}
-            </Selector>
-          </div>
-          <Button onClick={() => this.createGraph(this.state.selected_Xinput, this.state.selected_Yinput, this.state.selected_firstData, this.state.selected_secondData)} > Show Pls</Button>
+          <h2>I'm coming home</h2>
+          <Button onClick={() => this.setActivate(false)} > Set State</Button>
         </Panel2>
       </Container >
     );
