@@ -49,7 +49,7 @@ const BoxPanel = styled.div`
   text-align: center;
   img{
     display:inline-block;
-    margin : 10px;
+    margin-left : 15px;
   }
 `
 
