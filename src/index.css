@@ -5,20 +5,22 @@ body {
 }
 h1 {
   text-align: center;
-  margin : 5px;
-  font-size: 64px;
+  margin: 5px;
+  font-size: 32px;
+  font-family: "Quicksand", sans-serif;
 }
 
-h2{
-  font-size: 30px;
+h2 {
+  font-size: 20px;
+  font-family: "Quicksand", sans-serif;
 }
 
-.redBlackground{
-  background: crimson;
+.redBackground {
+  background: #ff5656;
 }
 
-.greenBlackground{
-  background-color: rgb(88, 218, 88);
+.greenBackground {
+  background-color: #91ee83;
 }
 button {
   border-radius: 4px;
